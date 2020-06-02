@@ -1,0 +1,19 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build:
+  local:
+    push: false # Do not push to docker hub
+  artifacts:
+    - image: brandonransom/auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync: # Tells Skaffold how to handle changes to files
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+
