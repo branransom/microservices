@@ -16,4 +16,11 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-
+    - image: brandonransom/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync: # Tells Skaffold how to handle changes to files
+        manual:
+          - src: '**/*.js'
+            dest: .
